@@ -11,7 +11,6 @@ It compares the extracted ID with a local database to confirm valid students and
 - 🔍 Extracts student ID numbers from card images using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 - 📁 Verifies IDs against a local database (`students.txt`)
 - 🕒 Automatically logs attendance to `attendance.txt`
-- 💻 Works fully offline — no internet connection needed
 - 🧾 Simple, lightweight, and easy to customize
 
 ---
