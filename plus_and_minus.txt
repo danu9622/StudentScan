@@ -1,0 +1,74 @@
+Add a manual attendance input option — either in your Flask web interface or from the terminal.
+
+Face verification
+
+Temporary code / login token
+
+
+
+
+--------------------------------------------------------------------------------------------------------------
+1. Photo Spoofing (Fake ID Image)
+
+Problem:
+A student takes a photo of someone else’s student card and uses it to “prove” they’re present.
+
+Possible Solutions:
+
+🧍‍♂️ Add face recognition: Compare the student’s face (captured live) to the photo on the card.
+
+⏱️ Use live detection: Ask the student to blink, smile, or move slightly — to verify it’s not a static photo.
+
+📍 Require in-person scan: Only allow scanning via a teacher’s camera (controlled device).
+
+🕵️ Record images: Save each scanned photo and ID so you can manually review suspicious entries.
+----------------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------------------------
+2. Unreadable Card (damaged, dirty, blurry photo)
+
+Problem:
+OCR can’t correctly read the number.
+
+Solutions:
+
+Improve OCR pre-processing (convert to grayscale, increase contrast).
+
+Let the user manually type or confirm the detected ID.
+
+Store images of failed scans for review.
+------------------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------------------------
+3. Fake or Nonexistent ID
+
+Problem:
+Someone uses a fake number not in the database.
+
+Solution:
+
+Simple: check students.txt and reject any ID not found.
+
+Optionally log these attempts in a separate file for review.
+------------------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------------------------
+4. Server Misuse
+
+Problem:
+Students try to spam the server with fake uploads.
+
+Solution:
+
+Require login authentication for access to the scan endpoint.
+
+Limit how many scans can come from one IP/device in a short time.
+
+Log all activity for traceability.
+------------------------------------------------------------------------------------------------------------------
