@@ -1,0 +1,7 @@
+###############################
+### student_id,student_name ###
+###############################
+
+123456,Frunza Daniel
+234567,Caraman David
+345678,Chihi Daniel
