@@ -53,24 +53,22 @@ while True:
         break
 
     # Try barcode detection
-    result = detector.detectAndDecode(frame)
+    ok, decoded_info, decoded_type, points = detector.detectAndDecodeWithType(frame)
 
-    if len(result) == 3:
-        ok, decoded_info, points = result
-    else:
-        ok, decoded_info, decoded_type, points = result
-
-    if ok:
-        codes = decoded_info if isinstance(decoded_info, list) else [decoded_info]
-
-        for code in codes:
-            if code and code not in scanned:
-                scanned.add(code)
-                mark_attendance(code)
+    if ok and decoded_info:
+        # decoded_info might be a tuple or string - extract the actual barcode value
+        if isinstance(decoded_info, tuple):
+            code = str(decoded_info[0]).strip() if decoded_info else ""
+        else:
+            code = str(decoded_info).strip()
+        
+        if code and code not in scanned:
+            scanned.add(code)
+            mark_attendance(code)
 
         # Draw polygon around barcode
-        if points is not None:
-            pts = points.astype(int).reshape(-1, 2)
+        if points is not None and len(points) > 0:
+            pts = points[0].astype(int).reshape(-1, 2)
             for i in range(len(pts)):
                 cv2.line(frame, tuple(pts[i]), tuple(pts[(i+1) % len(pts)]), (0, 255, 0), 2)
 
